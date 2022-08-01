@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root 'welcome#index'
+  devise_for :users
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+   
+    get 'my_profile', to: 'users#my_profile'
+    get 'book', to: 'book#search'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
-end
+  end
+  end
